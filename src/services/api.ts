@@ -40,9 +40,10 @@ export class StarWarsApi {
     return this.fetchWithCache<Character>(url);
   }
 
- static async getCharacters(urls: string[]): Promise<Character[]> {
+  // Initial solution which I later expanded on for what I opted for below.
+  static async getCharacters(urls: string[]): Promise<Character[]> {
     // Batch load characters with concurrency limit
-    const batchSize = 5; // Load 5 characters at a time
+    const batchSize = 5;
     const results: Character[] = [];
     
     for (let i = 0; i < urls.length; i += batchSize) {

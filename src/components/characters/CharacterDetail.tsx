@@ -1,77 +1,190 @@
+import styled from "styled-components";
 import type { Character } from "../../types";
+
+const Container = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+
+  @media (min-width: 1024px) {
+    padding: 1.5rem;
+  }
+`;
+
+const BackButton = styled.button`
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-size: 0.9rem;
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #444;
+  margin-bottom: 1.5rem;
+
+  &:hover {
+    background-color: #444;
+  }
+`;
+
+const DetailContainer = styled.div`
+  background-color: #111;
+  border: 1px solid #333;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+`;
+
+const DetailHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+`;
+
+const DetailTitle = styled.h1`
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fbbf24;
+
+  @media (min-width: 768px) {
+    font-size: 2.5rem;
+  }
+`;
+
+const Grid = styled.div`
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
+
+const DetailSection = styled.div`
+  margin-bottom: 2rem;
+`;
+
+const DetailSectionTitle = styled.h3`
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #fbbf24;
+`;
+
+const DetailInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const DetailInfoItem = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+  }
+`;
+
+const DetailInfoLabel = styled.span`
+  color: #fbbf24;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+  }
+`;
+
+const DetailInfoValue = styled.span`
+  color: #fff;
+  text-transform: capitalize;
+`;
 
 const CharacterDetail = ({ character, onBack }: {
   character: Character;
   onBack: () => void;
 }) => {
   return (
-    <div className="container-sm">
-      <button onClick={onBack} className="button button-secondary back-button">
+    <Container>
+      <BackButton onClick={onBack}>
         Back to Characters
-      </button>
+      </BackButton>
       
-      <div className="detail-container">
-        <div className="detail-header">
+      <DetailContainer>
+        <DetailHeader>
           <div style={{display: 'flex', alignItems: 'center'}}>
-            <h1 className="detail-title">{character.name}</h1>
+            <DetailTitle>{character.name}</DetailTitle>
           </div>
-        </div>
+        </DetailHeader>
         
-        <div className="grid-2">
-          <div className="detail-section">
-            <h3 className="detail-section-title">Physical Characteristics</h3>
-            <div className="detail-info">
-              <div className="detail-info-item">
-                <span className="detail-info-label">Height:</span>
-                <span className="detail-info-value">{character.height} cm</span>
-              </div>
-              <div className="detail-info-item">
-                <span className="detail-info-label">Mass:</span>
-                <span className="detail-info-value">{character.mass} kg</span>
-              </div>
-              <div className="detail-info-item">
-                <span className="detail-info-label">Hair Color:</span>
-                <span className="detail-info-value">{character.hair_color}</span>
-              </div>
-              <div className="detail-info-item">
-                <span className="detail-info-label">Skin Color:</span>
-                <span className="detail-info-value">{character.skin_color}</span>
-              </div>
-              <div className="detail-info-item">
-                <span className="detail-info-label">Eye Color:</span>
-                <span className="detail-info-value">{character.eye_color}</span>
-              </div>
-            </div>
-          </div>
+        <Grid>
+          <DetailSection>
+            <DetailSectionTitle>Physical Characteristics</DetailSectionTitle>
+            <DetailInfo>
+              <DetailInfoItem>
+                <DetailInfoLabel>Height:</DetailInfoLabel>
+                <DetailInfoValue>{character.height} cm</DetailInfoValue>
+              </DetailInfoItem>
+              <DetailInfoItem>
+                <DetailInfoLabel>Mass:</DetailInfoLabel>
+                <DetailInfoValue>{character.mass} kg</DetailInfoValue>
+              </DetailInfoItem>
+              <DetailInfoItem>
+                <DetailInfoLabel>Hair Color:</DetailInfoLabel>
+                <DetailInfoValue>{character.hair_color}</DetailInfoValue>
+              </DetailInfoItem>
+              <DetailInfoItem>
+                <DetailInfoLabel>Skin Color:</DetailInfoLabel>
+                <DetailInfoValue>{character.skin_color}</DetailInfoValue>
+              </DetailInfoItem>
+              <DetailInfoItem>
+                <DetailInfoLabel>Eye Color:</DetailInfoLabel>
+                <DetailInfoValue>{character.eye_color}</DetailInfoValue>
+              </DetailInfoItem>
+            </DetailInfo>
+          </DetailSection>
           
-          <div className="detail-section">
-            <h3 className="detail-section-title">Personal Information</h3>
-            <div className="detail-info">
-              <div className="detail-info-item">
-                <span className="detail-info-label">Birth Year:</span>
-                <span className="detail-info-value">{character.birth_year}</span>
-              </div>
-              <div className="detail-info-item">
-                <span className="detail-info-label">Gender:</span>
-                <span className="detail-info-value">{character.gender}</span>
-              </div>
-              <div className="detail-info-item">
-                <span className="detail-info-label">Films:</span>
-                <span className="detail-info-value">{character.films.length}</span>
-              </div>
-              <div className="detail-info-item">
-                <span className="detail-info-label">Starships:</span>
-                <span className="detail-info-value">{character.starships.length}</span>
-              </div>
-              <div className="detail-info-item">
-                <span className="detail-info-label">Vehicles:</span>
-                <span className="detail-info-value">{character.vehicles.length}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          <DetailSection>
+            <DetailSectionTitle>Personal Information</DetailSectionTitle>
+            <DetailInfo>
+              <DetailInfoItem>
+                <DetailInfoLabel>Birth Year:</DetailInfoLabel>
+                <DetailInfoValue>{character.birth_year}</DetailInfoValue>
+              </DetailInfoItem>
+              <DetailInfoItem>
+                <DetailInfoLabel>Gender:</DetailInfoLabel>
+                <DetailInfoValue>{character.gender}</DetailInfoValue>
+              </DetailInfoItem>
+              <DetailInfoItem>
+                <DetailInfoLabel>Films:</DetailInfoLabel>
+                <DetailInfoValue>{character.films.length}</DetailInfoValue>
+              </DetailInfoItem>
+              <DetailInfoItem>
+                <DetailInfoLabel>Starships:</DetailInfoLabel>
+                <DetailInfoValue>{character.starships.length}</DetailInfoValue>
+              </DetailInfoItem>
+              <DetailInfoItem>
+                <DetailInfoLabel>Vehicles:</DetailInfoLabel>
+                <DetailInfoValue>{character.vehicles.length}</DetailInfoValue>
+              </DetailInfoItem>
+            </DetailInfo>
+          </DetailSection>
+        </Grid>
+      </DetailContainer>
+    </Container>
   );
 };
 
