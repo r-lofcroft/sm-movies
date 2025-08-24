@@ -3,6 +3,8 @@ import type { Character, Film } from "./types";
 import MoviesList from "./components/movies/MovieList";
 import MovieDetail from "./components/movies/MovieDetail";
 import Navigation from "./components/navigation/Navigation";
+import CharactersList from "./components/characters/CharacterList";
+import CharacterDetail from "./components/characters/CharacterDetail";
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<string>('movies');
@@ -44,6 +46,20 @@ const App: React.FC = () => {
             film={selectedFilm}
             onBack={() => handleNavigate('movies')}
             onAddCharacters={handleAddCharacters}
+          />
+        ) : null;
+      case 'characters':
+        return (
+          <CharactersList
+            characters={discoveredCharacters}
+            onSelectCharacter={handleSelectCharacter}
+          />
+        );
+      case 'character':
+        return selectedCharacter ? (
+          <CharacterDetail
+            character={selectedCharacter}
+            onBack={() => handleNavigate('characters')}
           />
         ) : null;
       default:
